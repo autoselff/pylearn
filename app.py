@@ -7,6 +7,7 @@ def index():
     if request.method == "POST":
         words_1 = request.form.getlist("word_1")
         words_2 = request.form.getlist("word_2")
+        mode = request.form.get("mode")
 
         vocabulary = []
         for w1, w2 in zip(words_1, words_2):
@@ -14,7 +15,9 @@ def index():
                 vocabulary.append({"front": w1.strip(), "back": w2.strip()})
 
         if vocabulary:
-            return render_template("learn.html", vocabulary=vocabulary)
+            if mode == "quiz":
+                return render_template("quiz.html", vocabulary=vocabulary)
+            return render_template("flashcards.html", vocabulary=vocabulary)
 
     return render_template("index.html")
 

@@ -29,6 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
             currentIndex++;
             updateCard();
         }
+        else {
+          currentIndex = 0;
+          updateCard();
+      }
     });
 
     prevBtn.addEventListener('click', () => {
