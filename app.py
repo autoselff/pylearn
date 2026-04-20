@@ -1,19 +1,22 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        name = request.form.get("name", "").strip()
-        if name:
-            return redirect(url_for("congrats", name=name))
-    return render_template("index.html")
+        words_1 = request.form.getlist("word_1")
+        words_2 = request.form.getlist("word_2")
 
-@app.route("/congrats")
-def congrats():
-    name = request.args.get("name", "Gość")
-    return render_template("congrats.html", name=name)
+        vocabulary = []
+        for w1, w2 in zip(words_1, words_2):
+            if w1.strip() and w2.strip():
+                vocabulary.append({"front": w1.strip(), "back": w2.strip()})
+
+        if vocabulary:
+            return render_template("learn.html", vocabulary=vocabulary)
+
+    return render_template("index.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

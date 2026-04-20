@@ -1,23 +1,37 @@
 <!doctype html>
 <html lang="pl">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <title>Wpisz swoje imię</title>
-        <script src="{{ url_for('static', filename='style.js') }}"></script>
-    </head>
-    <body>
-        <main class="card">
-            <h1 class="title">Wpisz swoje imię</h1>
-            <form method="post" class="form">
-                <input
-                    name="name"
-                    class="input"
-                    placeholder="Twoje imię"
-                    required
-                />
-                <button type="submit" class="btn">Wyślij</button>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Learn some new words</title>
+    <script src="{{ url_for('static', filename='style.js') }}"></script>
+</head>
+<body>
+    <main class="container">
+        <header class="header">
+            <h1 class="logo">Learn some new words</h1>
+            <p>Here you can type words you want to learn.</p>
+        </header>
+
+        <section class="section">
+            <form method="post" id="vocab-form">
+                <div id="word-rows">
+                    {% for i in range(2) %}
+                    <div class="word-row">
+                        <input type="text" name="word_1" placeholder="Word" class="input-vocab">
+                        <input type="text" name="word_2" placeholder="Equivalent" class="input-vocab">
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div style="text-align: center; margin-top: 20px; display: flex; gap: 10px; justify-content: center;">
+                    <button type="button" id="add-row-btn" class="posts-button" style="background: var(--accent);">+ Add more</button>
+                    <button type="submit" class="download-button">Start learning</button>
+                </div>
             </form>
-        </main>
-    </body>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+</body>
 </html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Learning</title>
+    <script src="{{ url_for('static', filename='style.js') }}"></script>
+</head>
+<body>
+    <main class="container" style="max-width: 600px;">
+        <header class="header">
+            <h1 class="logo">Flashcards</h1>
+            <p id="counter">Loading...</p>
+        </header>
+
+        <section class="section" style="perspective: 1000px; min-height: 300px; display: flex; align-items: center; justify-content: center;">
+            <div id="flashcard" class="flashcard">
+                <div class="flashcard-front" id="front-text">Front</div>
+                <div class="flashcard-back" id="back-text">Back</div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div style="display: flex; gap: 20px; justify-content: center;">
+                <button id="prev-btn" class="posts-button">Previous</button>
+                <button id="next-btn" class="download-button">Next</button>
+            </div>
+            <br>
+            <a href="{{ url_for('index') }}" style="color: var(--text-dim); text-decoration: none; font-size: 13px;">Finish</a>
+        </footer>
+    </main>
+
+    <script>
+        const VOCAB_DATA = {{ vocabulary | tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='learn.js') }}"></script>
+</body>
+</html>
