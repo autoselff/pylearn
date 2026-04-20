@@ -1,2 +1,2 @@
 # PyLearn
-A web app designed to help users learn new vocabulary through flashcards and quizzes.
+A web application designed to help users learn new vocabulary using flashcards and quizzes.
