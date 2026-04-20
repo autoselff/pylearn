@@ -16,12 +16,21 @@
         <section class="section">
             <form method="post" id="vocab-form">
                 <div id="word-rows">
-                    {% for i in range(2) %}
-                    <div class="word-row">
-                        <input type="text" name="word_1" placeholder="Word" class="input-vocab">
-                        <input type="text" name="word_2" placeholder="Equivalent" class="input-vocab">
-                    </div>
-                    {% endfor %}
+                    {% if vocabulary %}
+                        {% for word in vocabulary %}
+                        <div class="word-row">
+                            <input type="text" name="word_1" value="{{ word.front }}" placeholder="Word" class="input-vocab">
+                            <input type="text" name="word_2" value="{{ word.back }}" placeholder="Equivalent" class="input-vocab">
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        {% for i in range(2) %}
+                        <div class="word-row">
+                            <input type="text" name="word_1" placeholder="Word" class="input-vocab">
+                            <input type="text" name="word_2" placeholder="Equivalent" class="input-vocab">
+                        </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
 
                 <div style="text-align: center; margin-top: 20px; display: flex; gap: 10px; justify-content: center;">

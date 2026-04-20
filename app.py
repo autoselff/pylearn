@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 
 app = Flask(__name__)
+app.secret_key = 'KEY'
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -14,12 +15,12 @@ def index():
             if w1.strip() and w2.strip():
                 vocabulary.append({"front": w1.strip(), "back": w2.strip()})
 
+        session['vocabulary'] = vocabulary
+
         if vocabulary:
             if mode == "quiz":
                 return render_template("quiz.html", vocabulary=vocabulary)
             return render_template("flashcards.html", vocabulary=vocabulary)
 
-    return render_template("index.html")
-
-if __name__ == "__main__":
-    app.run(debug=True)
+    saved_vocab = session.get('vocabulary', [])
+    return render_template("index.html", vocabulary=saved_vocab)
